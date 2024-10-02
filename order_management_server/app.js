@@ -6,10 +6,10 @@ require('dotenv').config();
 const app = express();
 
 const SERVER_PORT = process.env.PORT;
-const CLIENT_URL = process.env.URL;
+
 
 app.use(cors({
-    origin: [CLIENT_URL],
+    origin: ["https://order-manager-auth-and-table-client.vercel.app/"],
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
