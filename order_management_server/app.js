@@ -5,11 +5,11 @@ require('dotenv').config();
 
 const app = express();
 
-const SERVER_PORT = process.env.PORT;
+const PORT = process.env.PORT;
 
 
 app.use(cors({
-    origin: ["https://order-manager-auth-and-table-client.vercel.app/"],
+    origin: ["https://order-manager-auth-and-table-client.vercel.app"],
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -17,7 +17,7 @@ app.use(cors({
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${SERVER_PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 
