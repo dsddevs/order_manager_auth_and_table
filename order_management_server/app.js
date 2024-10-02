@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(cors({
-    origin: ['https://order-m-project.vercel.app'],
+    origin: ['https://order-manager-auth-and-table.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
