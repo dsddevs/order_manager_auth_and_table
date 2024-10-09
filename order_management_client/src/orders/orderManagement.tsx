@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Box, Typography, CircularProgress, Button} from "@mui/material";
+import {Box, Typography, CircularProgress, Button, Container} from "@mui/material";
 import { useGetOrdersQuery, useUpdateOrderMutation, useCreateOrderMutation, useDeleteOrderMutation } from "../services/orderApi";
 import { Filters, Order } from "../types";
 import { OrderFilters } from "../filters/orderFilter";
@@ -102,25 +102,38 @@ export const OrdersManagement: React.FC = () => {
     }
 
     return (
-        <Box>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                <Button onClick={handleLogout} variant="contained" color="secondary">
-                    Logout
-                </Button>
-                <Typography variant="h4" className={`text-slate-900`}>Orders Management</Typography>
-                <Button variant="contained" color="primary" onClick={() => setIsAddModalOpen(true)}>
-                    Add New Order
-                </Button>
+        <Container maxWidth="lg" sx={{ py: 4 }}>
+            <Box display="flex" flexDirection="column" gap={3}>
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Button onClick={handleLogout} variant="contained" color="secondary">
+                        Logout
+                    </Button>
+                    <Typography variant="h4" className="text-slate-900">
+                        Orders Management
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setIsAddModalOpen(true)}
+                    >
+                        Add New Order
+                    </Button>
+                </Box>
 
+                <OrderFilters onFilter={handleApplyFilters} onReset={handleResetFilters} />
+
+                <Box sx={{ overflowX: 'auto' }}>
+                    <UniversalTable<Order>
+                        columns={columns}
+                        data={filteredOrders as Order[]}
+                        onEdit={setEditingOrder}
+                        onDelete={setDeletingOrder}
+                        isLoading={isUpdating}
+                    />
+                </Box>
             </Box>
-            <OrderFilters onFilter={handleApplyFilters} onReset={handleResetFilters} />
-            <UniversalTable<Order>
-                columns={columns}
-                data={filteredOrders as Order[]}
-                onEdit={setEditingOrder}
-                onDelete={setDeletingOrder}
-                isLoading={isUpdating}
-            />
+
+            {/* Modals */}
             {editingOrder && (
                 <EditOrderModal
                     order={editingOrder}
@@ -150,6 +163,7 @@ export const OrdersManagement: React.FC = () => {
                 severity={notification.severity}
                 onClose={handleCloseNotification}
             />
-        </Box>
+        </Container>
     );
 };
+
