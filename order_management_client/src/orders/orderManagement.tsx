@@ -102,7 +102,7 @@ export const OrdersManagement: React.FC = () => {
     }
 
     return (
-        <Box display="flex" justifyContent="space-center" alignItems="center" mt={2}>
+        <Box>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <Button onClick={handleLogout} variant="contained" color="secondary">
                     Logout
